@@ -99,4 +99,69 @@ class RomanNumeralTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid number range. Please provide a value between 1 and 3999.");
     }
+
+    @Test
+    void shouldConvertIToArabic() {
+        assertThat(RomanNumeral.toArabic("I")).isEqualTo(1);
+    }
+
+    @Test
+    void shouldConvertIVToArabic() {
+        assertThat(RomanNumeral.toArabic("IV")).isEqualTo(4);
+    }
+
+    @Test
+    void shouldConvertVToArabic() {
+        assertThat(RomanNumeral.toArabic("V")).isEqualTo(5);
+    }
+
+    @Test
+    void shouldConvertIXToArabic() {
+        assertThat(RomanNumeral.toArabic("IX")).isEqualTo(9);
+    }
+
+    @Test
+    void shouldConvertXToArabic() {
+        assertThat(RomanNumeral.toArabic("X")).isEqualTo(10);
+    }
+
+    @Test
+    void shouldConvertXLToArabic() {
+        assertThat(RomanNumeral.toArabic("XL")).isEqualTo(40);
+    }
+
+    @Test
+    void shouldConvertLToArabic() {
+        assertThat(RomanNumeral.toArabic("L")).isEqualTo(50);
+    }
+
+    @Test
+    void shouldConvertXCToArabic() {
+        assertThat(RomanNumeral.toArabic("XC")).isEqualTo(90);
+    }
+
+    @Test
+    void shouldConvertCToArabic() {
+        assertThat(RomanNumeral.toArabic("C")).isEqualTo(100);
+    }
+
+    @Test
+    void shouldConvertCDToArabic() {
+        assertThat(RomanNumeral.toArabic("CD")).isEqualTo(400);
+    }
+
+    @Test
+    void shouldConvertDToArabic() {
+        assertThat(RomanNumeral.toArabic("D")).isEqualTo(500);
+    }
+
+    @Test
+    void shouldConvertCMToArabic() {
+        assertThat(RomanNumeral.toArabic("CM")).isEqualTo(900);
+    }
+
+    @Test
+    void shouldConvertMToArabic() {
+        assertThat(RomanNumeral.toArabic("M")).isEqualTo(1000);
+    }
 }
