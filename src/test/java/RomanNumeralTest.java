@@ -5,37 +5,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RomanNumeralTest {
 
     @Test
-    void shouldConvert1ToRoman(){
+    void shouldConvert1ToRoman() {
         assertThat(RomanNumeral.toRoman(1)).isEqualTo("I");
     }
 
     @Test
-    void shouldConvert5ToRoman(){
+    void shouldConvert5ToRoman() {
         assertThat(RomanNumeral.toRoman(5)).isEqualTo("V");
     }
 
     @Test
-    void shouldConvert10ToRoman(){
+    void shouldConvert10ToRoman() {
         assertThat(RomanNumeral.toRoman(10)).isEqualTo("X");
     }
 
     @Test
-    void shouldConvert50ToRoman(){
+    void shouldConvert50ToRoman() {
         assertThat(RomanNumeral.toRoman(50)).isEqualTo("L");
     }
 
     @Test
-    void shouldConvert100ToRoman(){
+    void shouldConvert100ToRoman() {
         assertThat(RomanNumeral.toRoman(100)).isEqualTo("C");
     }
 
     @Test
-    void shouldConvert500ToRoman(){
+    void shouldConvert500ToRoman() {
         assertThat(RomanNumeral.toRoman(500)).isEqualTo("D");
     }
 
     @Test
-    void shouldConvert1000ToRoman(){
+    void shouldConvert1000ToRoman() {
         assertThat(RomanNumeral.toRoman(1000)).isEqualTo("M");
     }
 
@@ -58,4 +58,35 @@ class RomanNumeralTest {
     void shouldConvert35ToRoman() {
         assertThat(RomanNumeral.toRoman(35)).isEqualTo("XXXV");
     }
+
+    @Test
+    void shouldConvert4ToRoman() {
+        assertThat(RomanNumeral.toRoman(4)).isEqualTo("IV");
+    }
+
+    @Test
+    void shouldConvert9ToRoman() {
+        assertThat(RomanNumeral.toRoman(9)).isEqualTo("IX");
+    }
+
+    @Test
+    void shouldConvert40ToRoman() {
+        assertThat(RomanNumeral.toRoman(40)).isEqualTo("XL");
+    }
+
+    @Test
+    void shouldConvert90ToRoman() {
+        assertThat(RomanNumeral.toRoman(90)).isEqualTo("XC");
+    }
+
+    @Test
+    void shouldConvert400ToRoman() {
+        assertThat(RomanNumeral.toRoman(400)).isEqualTo("CD");
+    }
+
+    @Test
+    void shouldConvert900ToRoman() {
+        assertThat(RomanNumeral.toRoman(900)).isEqualTo("CM");
+    }
+
 }
