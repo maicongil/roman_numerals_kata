@@ -164,4 +164,21 @@ class RomanNumeralTest {
     void shouldConvertMToArabic() {
         assertThat(RomanNumeral.toArabic("M")).isEqualTo(1000);
     }
+
+    @Test
+    void shouldConvertIIIToArabic() {
+        assertThat(RomanNumeral.toArabic("III")).isEqualTo(3);
+    }
+
+    @Test
+    void shouldConvertXIIToArabic() {
+        assertThat(RomanNumeral.toArabic("XII")).isEqualTo(12);
+    }
+
+    @Test
+    void shouldConvertLXIVToArabic() {
+        assertThat(RomanNumeral.toArabic("LXIV")).isEqualTo(64);
+    }
+
+
 }

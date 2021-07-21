@@ -39,8 +39,9 @@ public class RomanNumeral {
         int result= 0;
 
         for (var romanToArabicEntry : romanToArabicMap.entrySet()) {
-            if(romanNumeral == romanToArabicEntry.getKey()){
-                result= romanToArabicEntry.getValue();
+            while(romanNumeral.startsWith(romanToArabicEntry.getKey())){
+                result+= romanToArabicEntry.getValue();
+                romanNumeral= romanNumeral.replaceFirst(romanToArabicEntry.getKey(),"");
             }
         }
         return result;
