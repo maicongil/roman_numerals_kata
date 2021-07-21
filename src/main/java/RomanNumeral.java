@@ -23,6 +23,7 @@ public class RomanNumeral {
     }
 
     public static String toRoman(int arabicNumber){
+        validateArabicNumberInput(arabicNumber);
         StringBuilder result= new StringBuilder();
 
         for (var romanToArabicEntry : romanToArabicMap.entrySet()) {
@@ -32,5 +33,11 @@ public class RomanNumeral {
             }
         }
         return result.toString();
+    }
+
+    private static void validateArabicNumberInput(int arabicNumber) {
+        if(arabicNumber < 1 || arabicNumber > 3999){
+            throw new IllegalArgumentException("Invalid number range. Please provide a value between 1 and 3999.");
+        }
     }
 }

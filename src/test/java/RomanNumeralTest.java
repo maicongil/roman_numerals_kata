@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RomanNumeralTest {
 
@@ -89,4 +92,11 @@ class RomanNumeralTest {
         assertThat(RomanNumeral.toRoman(900)).isEqualTo("CM");
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1,0,4000})
+    void shouldOnlyConvertNumbersBetween1and3999ToRoman(int input) {
+        assertThatThrownBy(() -> RomanNumeral.toRoman(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid number range. Please provide a value between 1 and 3999.");
+    }
 }
