@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -180,5 +181,24 @@ class RomanNumeralTest {
         assertThat(RomanNumeral.toArabic("LXIV")).isEqualTo(64);
     }
 
+    @Test
+    void shouldConvertLowerCaseRomanToArabic() {
+        assertThat(RomanNumeral.toArabic("mmmdccxxiv")).isEqualTo(3724);
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"  ", "\t", "\n"})
+    void shouldValidateInputWhenConvertingToArabic(String input) {
+        assertThatThrownBy(() -> RomanNumeral.toArabic(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Please provide a Roman numeral to be converted.");
+    }
+
+    @Test
+    void shouldValidateInvalidRomanNumeralsWhenConvertingToArabic() {
+        assertThatThrownBy(() -> RomanNumeral.toArabic("IL"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("The value IL cannot be converted. Please provide a valid Roman numeral.");
+    }
 
 }
