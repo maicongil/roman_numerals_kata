@@ -1,3 +1,6 @@
+package com.kata.romanconverter.domain;
+
+import com.kata.romanconverter.domain.RomanNumeral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
