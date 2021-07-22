@@ -43,7 +43,7 @@ the given Roman numeral.
 ## Other considerations regarding the solution
 
 ### Validations
-I add some basic input validations just to avoid unexpected behaviors.
+I added some basic input validations just to avoid unexpected behaviors.
 * Validate the input number range in Arabic to Roman conversion
 * Validate if the input Roman numeral is valid in Roman to Arabic validation
 
