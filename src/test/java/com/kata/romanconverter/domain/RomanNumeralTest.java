@@ -1,8 +1,8 @@
 package com.kata.romanconverter.domain;
 
-import com.kata.romanconverter.domain.RomanNumeral;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,197 +11,74 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RomanNumeralTest {
 
-    @Test
-    void shouldConvert1ToRoman() {
-        assertThat(RomanNumeral.toRoman(1)).isEqualTo("I");
+    @ParameterizedTest
+    @CsvSource({"1,I","5,V","10,X","50,L","100,C","500,D","1000,M"})
+    void shouldConvertArabicNumberToSimpleRomanNumeral(int input, String expected) {
+        assertThat(RomanNumeral.toRoman(input)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2,II","8,VIII","16,XVI","33,XXXIII","42,XLII","75,LXXV","128,CXXVIII","650,DCL","2048,MMXLVIII"})
+    void shouldConvertArabicNumberToCompoundRomanNumeral(int input, String expected) {
+        assertThat(RomanNumeral.toRoman(input)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"4,IV","9,IX","40,XL","90,XC","400,CD","900,CM"})
+    void shouldConvertArabicNumberToRomanNumeralRepresentedBySubtractiveNotation(int input, String expected) {
+        assertThat(RomanNumeral.toRoman(input)).isEqualTo(expected);
     }
 
     @Test
-    void shouldConvert5ToRoman() {
-        assertThat(RomanNumeral.toRoman(5)).isEqualTo("V");
-    }
-
-    @Test
-    void shouldConvert10ToRoman() {
-        assertThat(RomanNumeral.toRoman(10)).isEqualTo("X");
-    }
-
-    @Test
-    void shouldConvert50ToRoman() {
-        assertThat(RomanNumeral.toRoman(50)).isEqualTo("L");
-    }
-
-    @Test
-    void shouldConvert100ToRoman() {
-        assertThat(RomanNumeral.toRoman(100)).isEqualTo("C");
-    }
-
-    @Test
-    void shouldConvert500ToRoman() {
-        assertThat(RomanNumeral.toRoman(500)).isEqualTo("D");
-    }
-
-    @Test
-    void shouldConvert1000ToRoman() {
-        assertThat(RomanNumeral.toRoman(1000)).isEqualTo("M");
-    }
-
-    @Test
-    void shouldConvert3ToRoman() {
-        assertThat(RomanNumeral.toRoman(3)).isEqualTo("III");
-    }
-
-    @Test
-    void shouldConvert7ToRoman() {
-        assertThat(RomanNumeral.toRoman(7)).isEqualTo("VII");
-    }
-
-    @Test
-    void shouldConvert13ToRoman() {
-        assertThat(RomanNumeral.toRoman(13)).isEqualTo("XIII");
-    }
-
-    @Test
-    void shouldConvert35ToRoman() {
-        assertThat(RomanNumeral.toRoman(35)).isEqualTo("XXXV");
-    }
-
-    @Test
-    void shouldConvert4ToRoman() {
-        assertThat(RomanNumeral.toRoman(4)).isEqualTo("IV");
-    }
-
-    @Test
-    void shouldConvert9ToRoman() {
-        assertThat(RomanNumeral.toRoman(9)).isEqualTo("IX");
-    }
-
-    @Test
-    void shouldConvert40ToRoman() {
-        assertThat(RomanNumeral.toRoman(40)).isEqualTo("XL");
-    }
-
-    @Test
-    void shouldConvert90ToRoman() {
-        assertThat(RomanNumeral.toRoman(90)).isEqualTo("XC");
-    }
-
-    @Test
-    void shouldConvert400ToRoman() {
-        assertThat(RomanNumeral.toRoman(400)).isEqualTo("CD");
-    }
-
-    @Test
-    void shouldConvert900ToRoman() {
-        assertThat(RomanNumeral.toRoman(900)).isEqualTo("CM");
+    void shouldConvertArabicNumberToMaxRomanNumeralAllowed() {
+        assertThat(RomanNumeral.toRoman(3999)).isEqualTo("MMMCMXCIX");
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1,0,4000})
-    void shouldOnlyConvertNumbersBetween1and3999ToRoman(int input) {
+    void shouldOnlyConvertArabicNumbersBetween1and3999ToRoman(int input) {
         assertThatThrownBy(() -> RomanNumeral.toRoman(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid number range. Please provide a value between 1 and 3999.");
     }
 
-    @Test
-    void shouldConvertIToArabic() {
-        assertThat(RomanNumeral.toArabic("I")).isEqualTo(1);
+    @ParameterizedTest
+    @CsvSource({"1,I","5,V","10,X","50,L","100,C","500,D","1000,M"})
+    void shouldConvertSimpleRomanNumeralToArabicNumber(int expected, String input) {
+        assertThat(RomanNumeral.toArabic(input)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2,II","8,VIII","16,XVI","33,XXXIII","42,XLII","75,LXXV","128,CXXVIII","650,DCL","2048,MMXLVIII"})
+    void shouldConvertCompoundRomanNumeralToArabicNumber(int expected, String input) {
+        assertThat(RomanNumeral.toArabic(input)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"4,IV","9,IX","40,XL","90,XC","400,CD","900,CM"})
+    void shouldConvertRomanNumeralRepresentedBySubtractiveNotationToArabicNumber(int expected, String input) {
+        assertThat(RomanNumeral.toArabic(input)).isEqualTo(expected);
     }
 
     @Test
-    void shouldConvertIVToArabic() {
-        assertThat(RomanNumeral.toArabic("IV")).isEqualTo(4);
-    }
-
-    @Test
-    void shouldConvertVToArabic() {
-        assertThat(RomanNumeral.toArabic("V")).isEqualTo(5);
-    }
-
-    @Test
-    void shouldConvertIXToArabic() {
-        assertThat(RomanNumeral.toArabic("IX")).isEqualTo(9);
-    }
-
-    @Test
-    void shouldConvertXToArabic() {
-        assertThat(RomanNumeral.toArabic("X")).isEqualTo(10);
-    }
-
-    @Test
-    void shouldConvertXLToArabic() {
-        assertThat(RomanNumeral.toArabic("XL")).isEqualTo(40);
-    }
-
-    @Test
-    void shouldConvertLToArabic() {
-        assertThat(RomanNumeral.toArabic("L")).isEqualTo(50);
-    }
-
-    @Test
-    void shouldConvertXCToArabic() {
-        assertThat(RomanNumeral.toArabic("XC")).isEqualTo(90);
-    }
-
-    @Test
-    void shouldConvertCToArabic() {
-        assertThat(RomanNumeral.toArabic("C")).isEqualTo(100);
-    }
-
-    @Test
-    void shouldConvertCDToArabic() {
-        assertThat(RomanNumeral.toArabic("CD")).isEqualTo(400);
-    }
-
-    @Test
-    void shouldConvertDToArabic() {
-        assertThat(RomanNumeral.toArabic("D")).isEqualTo(500);
-    }
-
-    @Test
-    void shouldConvertCMToArabic() {
-        assertThat(RomanNumeral.toArabic("CM")).isEqualTo(900);
-    }
-
-    @Test
-    void shouldConvertMToArabic() {
-        assertThat(RomanNumeral.toArabic("M")).isEqualTo(1000);
-    }
-
-    @Test
-    void shouldConvertIIIToArabic() {
-        assertThat(RomanNumeral.toArabic("III")).isEqualTo(3);
-    }
-
-    @Test
-    void shouldConvertXIIToArabic() {
-        assertThat(RomanNumeral.toArabic("XII")).isEqualTo(12);
-    }
-
-    @Test
-    void shouldConvertLXIVToArabic() {
-        assertThat(RomanNumeral.toArabic("LXIV")).isEqualTo(64);
-    }
-
-    @Test
-    void shouldConvertLowerCaseRomanToArabic() {
+    void shouldConvertLowerCaseRomanToArabicNumber() {
         assertThat(RomanNumeral.toArabic("mmmdccxxiv")).isEqualTo(3724);
     }
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {"  ", "\t", "\n"})
-    void shouldValidateInputWhenConvertingToArabic(String input) {
+    void shouldNotAllowNullOrBlankInputWhenConvertingToArabic(String input) {
         assertThatThrownBy(() -> RomanNumeral.toArabic(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Please provide a Roman numeral to be converted.");
     }
 
-    @Test
-    void shouldValidateInvalidRomanNumeralsWhenConvertingToArabic() {
-        assertThatThrownBy(() -> RomanNumeral.toArabic("IL"))
+    @ParameterizedTest
+    @ValueSource(strings = {"IL", "A", "II I"})
+    void shouldNotAllowInvalidRomanNumeralsWhenConvertingToArabic(String input) {
+        assertThatThrownBy(() -> RomanNumeral.toArabic(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("The value IL cannot be converted. Please provide a valid Roman numeral.");
+                .hasMessage("The value " + input + " cannot be converted. Please provide a valid Roman numeral.");
     }
 
 }
