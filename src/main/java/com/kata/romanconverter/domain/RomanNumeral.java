@@ -52,17 +52,15 @@ public enum RomanNumeral {
                 romanInput= romanInput.replaceFirst(romanNumeral.name(),"");
             }
         }
-
-        if(!romanInput.isEmpty()){
-            throw new IllegalArgumentException("The value " + roman + " cannot be converted. Please provide a valid Roman numeral.");
-        }
-
         return result;
     }
 
     private static void validateRomanNumeralInput(String roman) {
         if(Objects.isNull(roman) || roman.isBlank()){
             throw new IllegalArgumentException("Please provide a Roman numeral to be converted.");
+        }
+        if(!roman.matches("(?i)^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")){
+            throw new IllegalArgumentException("The value " + roman + " cannot be converted. Please provide a valid Roman numeral.");
         }
     }
 
