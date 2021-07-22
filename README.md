@@ -55,6 +55,7 @@ CLI classes.
 ## How to run the program
 ### Requirements
 * Java 11+
+* JAVA_HOME configured
 ### Running the packaged program
 1. Download and unzip the file 'app.zip' located in the root folder of this project
 2. Run the script 'convert' located in /appassembler/bin
